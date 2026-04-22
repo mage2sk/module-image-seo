@@ -8,10 +8,11 @@
  * configuration group and plugins on the Magento image uploader, gallery
  * block, and catalog image helper.
  *
- * Panth_ProductGallery is an optional soft dependency: when present, its
+ * Panth_ProductGallery is an OPTIONAL soft dependency: when present, its
  * gallery block is wired to the template resolver via di.xml; when absent,
  * this module still renders template-based alt/title for native Magento
- * galleries.
+ * galleries. The optional link is declared via composer "suggest" only so
+ * module.xml keeps zero non-Core Panth sequence entries.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -20,7 +21,6 @@
         <sequence>
             <module name="Panth_Core"/>
             <module name="Magento_Catalog"/>
-            <module name="Panth_ProductGallery"/>
         </sequence>
     </module>
 </config>
