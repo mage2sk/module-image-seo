@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Image SEO — Module declaration.
+ *
+ * Template-based alt/title generation for product images, extracted from
+ * Panth_AdvancedSEO as a standalone module. Provides the panth_seo/image
+ * configuration group and plugins on the Magento image uploader, gallery
+ * block, and catalog image helper.
+ *
+ * Panth_ProductGallery is an optional soft dependency: when present, its
+ * gallery block is wired to the template resolver via di.xml; when absent,
+ * this module still renders template-based alt/title for native Magento
+ * galleries.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Panth_ImageSeo" setup_version="1.0.0">
+        <sequence>
+            <module name="Panth_Core"/>
+            <module name="Magento_Catalog"/>
+            <module name="Panth_ProductGallery"/>
+        </sequence>
+    </module>
+</config>

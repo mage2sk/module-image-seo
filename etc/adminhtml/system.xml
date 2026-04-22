@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Image SEO — System configuration.
+ *
+ * Re-declares section `panth_seo` so that Magento merges this group into
+ * the existing Advanced SEO section (tab: panth). Only the Image group is
+ * defined here.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="panth_image_seo" translate="label" sortOrder="85" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Image SEO</label>
+            <tab>panth</tab>
+            <resource>Panth_ImageSeo::config</resource>
+
+            <group id="image" translate="label" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image SEO</label>
+                <field id="image_seo_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Template-Based Image Alt/Title</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled, product image alt and title attributes are generated from configurable templates using tokens like {{name}}, {{store}}, {{sku}}, {{category}}.</comment>
+                </field>
+                <field id="alt_template" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alt Text Template</label>
+                    <comment><![CDATA[Tokens: {{name}}, {{store}}, {{sku}}, {{category}}. Filters: |truncate:N, |title, |lower, |upper, |strip, |default:'value'. Default: <code>{{name}} - {{store}}</code>]]></comment>
+                    <depends>
+                        <field id="image_seo_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="title_template" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title Text Template</label>
+                    <comment><![CDATA[Same token syntax as Alt template. Falls back to alt text when empty. Default: <code>{{name}}</code>]]></comment>
+                    <depends>
+                        <field id="image_seo_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="gallery_seo_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply to Gallery Images JSON</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Also inject alt/title into the product gallery images JSON (used by fotorama/gallery widgets).</comment>
+                    <depends>
+                        <field id="image_seo_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

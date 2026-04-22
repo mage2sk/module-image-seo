@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Image SEO — DI configuration.
+ *
+ * Declares the VisionAdapter preference and registers plugins on the
+ * catalog image uploader, image helper (label) and product view gallery
+ * block. When Panth_ProductGallery is installed, its gallery block and
+ * hide-default plugin are wired up to the local template resolver so the
+ * custom gallery picks up template-based alt/title. Those type entries
+ * are inert when ProductGallery is absent (Magento skips unknown types).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Default vision adapter: no-op. Override with a real implementation
+         via DI preference to plug in OpenAI Vision, Claude Vision, etc. -->
+    <preference for="Panth\ImageSeo\Model\ImageSeo\VisionAdapterInterface"
+                type="Panth\ImageSeo\Model\ImageSeo\NullVisionAdapter"/>
+
+    <!-- Image plugins -->
+    <type name="Magento\Catalog\Model\ImageUploader">
+        <plugin name="panth_image_seo_uploader" type="Panth\ImageSeo\Plugin\Image\UploaderPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Image">
+        <plugin name="panth_image_seo_product_image_label" type="Panth\ImageSeo\Plugin\Image\ProductImagePlugin"/>
+        <plugin name="panth_image_seo_image_attributes" type="Panth\ImageSeo\Plugin\Image\ImageAttributesPlugin" sortOrder="20"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\View\Gallery">
+        <plugin name="panth_image_seo_gallery" type="Panth\ImageSeo\Plugin\Image\GalleryImageSeoPlugin" sortOrder="10"/>
+    </type>
+
+    <!-- Soft wire: inject template resolver into Panth_ProductGallery so
+         the custom gallery used on both Hyva and Luma picks up the
+         template-based alt/title from Image SEO config. When
+         Panth_ProductGallery is not installed, these type entries are
+         simply ignored by Magento DI. -->
+    <type name="Panth\ProductGallery\Plugin\HideDefaultGallery">
+        <arguments>
+            <argument name="imageTemplateResolver" xsi:type="object">Panth\ImageSeo\Model\ImageSeo\ImageTemplateResolver</argument>
+        </arguments>
+    </type>
+    <type name="Panth\ProductGallery\Block\Gallery">
+        <arguments>
+            <argument name="imageTemplateResolver" xsi:type="object">Panth\ImageSeo\Model\ImageSeo\ImageTemplateResolver</argument>
+        </arguments>
+    </type>
+</config>

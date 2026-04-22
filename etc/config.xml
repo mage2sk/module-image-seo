@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Image SEO — Default configuration values.
+ *
+ * Defaults for every field in the panth_seo/image group. These mirror the
+ * original defaults shipped with Panth_AdvancedSEO so behaviour is
+ * preserved for stores upgrading to the split module.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <panth_image_seo>
+            <image>
+                <image_seo_enabled>1</image_seo_enabled>
+                <alt_template>{{name}} - {{store}}</alt_template>
+                <title_template>{{name}}</title_template>
+                <gallery_seo_enabled>1</gallery_seo_enabled>
+            </image>
+        </panth_image_seo>
+    </default>
+</config>
