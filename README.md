@@ -9,6 +9,10 @@
 
 # Panth Image SEO — Template-Based Alt/Title for Magento 2 Product Images | Panth Infotech
 
+<p align="center">
+  <img src="docs/screenshots/hero-linkedin.png" alt="Panth Image SEO for Magento 2 — Fix Your Magento 2 Image SEO in 2 Minutes. Auto-generate SEO alt & title text for every product image. Tokens, filters, multi-store, Hyvä + Luma. Built by Kishan Savaliya, Panth Infotech — Upwork Top Rated Plus." width="520" />
+</p>
+
 [![Magento 2.4.4 - 2.4.8](https://img.shields.io/badge/Magento-2.4.4%20--%202.4.8-orange?logo=magento&logoColor=white)](https://magento.com)
 [![PHP 8.1 - 8.4](https://img.shields.io/badge/PHP-8.1%20--%208.4-blue?logo=php&logoColor=white)](https://php.net)
 [![Hyva Compatible](https://img.shields.io/badge/Hyva-Compatible-0D9488)](https://www.hyva.io)
@@ -144,13 +148,21 @@ Manually writing alt text for every product (or every image within every product
 
 ---
 
-## Screenshot
+## Screenshots
 
 ### Admin Configuration — Stores → Configuration → Panth Extensions → Image SEO
 
-![Panth Image SEO admin configuration screen](docs/screenshots/admin-config.png)
+![Panth Image SEO admin configuration screen — Enable Template-Based Image Alt/Title, Alt Text Template, Title Text Template, Apply to Gallery Images JSON](docs/screenshots/admin-config.png)
 
 *The admin UI exposes every setting at store-view scope: master toggle, alt template, title template, and gallery-injection toggle. Token and filter reference is inlined under each field so the merchant never has to leave the page to find the syntax.*
+
+### Before / After — What Changes on Your Storefront
+
+<p align="center">
+  <img src="docs/screenshots/hero-linkedin.png" alt="Panth Image SEO before/after comparison — blank alt attributes become descriptive SEO-optimized alt text" width="480" />
+</p>
+
+*Before: `<img alt="">` or `<img alt="Image">` — invisible to image search, fails accessibility audits. After: `<img alt="Premium Leather Bag - Luma Store View">` — indexed, accessible, on-brand across every store view.*
 
 ---
 
