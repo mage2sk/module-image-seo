@@ -30,6 +30,16 @@
     <type name="Magento\Catalog\Block\Product\View\Gallery">
         <plugin name="panth_image_seo_gallery" type="Panth\ImageSeo\Plugin\Image\GalleryImageSeoPlugin" sortOrder="10"/>
     </type>
+    <!-- ImageFactory is the real source of the alt label for category
+         grids, related / upsell / cross-sell tiles and most widgets. Its
+         internal getLabel() is a private method that reads
+         $product->getData('image_label') and falls back to the product
+         name, so plugins on Helper\Image don't reach this surface. We
+         stamp the template-rendered label onto the returned ImageBlock
+         via an after-plugin on the public create() method. -->
+    <type name="Magento\Catalog\Block\Product\ImageFactory">
+        <plugin name="panth_image_seo_image_factory" type="Panth\ImageSeo\Plugin\Image\ImageFactoryPlugin" sortOrder="10"/>
+    </type>
 
     <!-- Soft wire: inject template resolver into Panth_ProductGallery so
          the custom gallery used on both Hyva and Luma picks up the
