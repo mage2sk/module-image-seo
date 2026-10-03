@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth Image SEO - DI configuration.
+ *
+ * Declares the VisionAdapter preference and registers plugins on the
+ * catalog image uploader, image helper (label) and product view gallery
+ * block.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Default vision adapter: no-op. Override with a real implementation
+         via DI preference. -->
+    <preference for="Panth\ImageSeo\Model\ImageSeo\VisionAdapterInterface"
+                type="Panth\ImageSeo\Model\ImageSeo\NullVisionAdapter"/>
+
+    <!-- Image plugins -->
+    <type name="Magento\Catalog\Model\ImageUploader">
+        <plugin name="panth_image_seo_uploader" type="Panth\ImageSeo\Plugin\Image\UploaderPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Image">
+        <plugin name="panth_image_seo_product_image_label" type="Panth\ImageSeo\Plugin\Image\ProductImagePlugin"/>
+        <plugin name="panth_image_seo_image_attributes" type="Panth\ImageSeo\Plugin\Image\ImageAttributesPlugin" sortOrder="20"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\View\Gallery">
+        <plugin name="panth_image_seo_gallery" type="Panth\ImageSeo\Plugin\Image\GalleryImageSeoPlugin" sortOrder="10"/>
+    </type>
+    <!-- ImageFactory is the real source of the alt label for category
+         grids, related / upsell / cross-sell tiles and most widgets. Its
+         internal getLabel() is a private method that reads
+         $product->getData('image_label') and falls back to the product
+         name, so plugins on Helper\Image don't reach this surface. We
+         stamp the template-rendered label onto the returned ImageBlock
+         via an after-plugin on the public create() method. -->
+    <type name="Magento\Catalog\Block\Product\ImageFactory">
+        <plugin name="panth_image_seo_image_factory" type="Panth\ImageSeo\Plugin\Image\ImageFactoryPlugin" sortOrder="10"/>
+    </type>
+</config>
