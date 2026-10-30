@@ -2,8 +2,8 @@
     "name": "mage2kishan/module-image-seo",
     "description": "Panth Image SEO \u2014 template-based alt/title generation for Magento 2 product images, with token substitution and gallery support.",
     "type": "magento2-module",
-    "version": "1.0.13",
-    "license": "proprietary",
+    "version": "1.0.14",
+    "license": "MIT",
     "keywords": [
         "magento2",
         "magento2-module",
